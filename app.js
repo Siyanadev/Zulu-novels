@@ -1,22 +1,23 @@
-// 🔥 Firebase imports
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+// 🔥 Firebase imports (USE THIS)
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.12.1/firebase-firestore.js";
 
-// 🔑 YOUR CONFIG (REPLACE WITH YOUR REAL ONE)
+// 🔑 YOUR CONFIG
 const firebaseConfig = {
-  apiKey: "PUT_YOURS",
-  authDomain: "PUT_YOURS",
-  projectId: "PUT_YOURS",
-  storageBucket: "PUT_YOURS",
-  messagingSenderId: "PUT_YOURS",
-  appId: "PUT_YOURS"
+  apiKey: "AIzaSyAePrb-yYKqiFKTKj0pMQi2P6hOjeEvXmg",
+  authDomain: "zulu-novels.firebaseapp.com",
+  projectId: "zulu-novels",
+  storageBucket: "zulu-novels.firebasestorage.app",
+  messagingSenderId: "283912034336",
+  appId: "1:283912034336:web:a403943a6918f1fdfa0445",
+  measurementId: "G-Y8JNZBW1YP"
 };
 
 // 🚀 Init Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-// 📚 Load novels
+// 📚 Load novels from Firebase
 async function loadNovels() {
   const querySnapshot = await getDocs(collection(db, "novels"));
 
@@ -29,14 +30,14 @@ async function loadNovels() {
   displayNovels(novels);
 }
 
-// 🎨 Display
+// 🎨 Display novels
 function displayNovels(list) {
   const container = document.getElementById("novel-list");
   container.innerHTML = "";
 
   list.forEach(novel => {
     container.innerHTML += `
-      <div class="novel-card" onclick="openNovel('${novel.id}')">
+      <div class="novel-card">
         <img src="${novel.image}" />
         <h3>${novel.title}</h3>
         <p>${novel.category}</p>
@@ -45,10 +46,5 @@ function displayNovels(list) {
   });
 }
 
-// 📖 Open story
-function openNovel(id) {
-  alert("Opening story... (next step we improve this)");
-}
-
-// ▶️ Start
+// ▶️ Start app
 loadNovels();
